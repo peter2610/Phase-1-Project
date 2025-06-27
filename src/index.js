@@ -121,3 +121,24 @@ function showAddForm(city, weather, activity = "") {
   });
 }
 
+// Admin view
+function renderAdmin() {
+  const container = document.getElementById("admin-content");
+  container.innerHTML = "";
+  suggestions.forEach(s => {
+    const item = document.createElement("div");
+    item.className = "admin-item";
+    item.innerHTML = `
+      <p>
+        ${s.city} / ${s.weather} / ${s.activity}<br/>
+        Outfit: <input value="${s.outfit}" data-id="${s.id}" class="outfit"><br/>
+        Task: <input value="${s.idea}" data-id="${s.id}" class="idea"><br/>
+        <button class="patch" type="button" data-id="${s.id}">Edit</button>
+        <button class="del" type="button" data-id="${s.id}">Delete</button>
+      </p>
+    `;
+    item.querySelector(".patch").addEventListener("click", patchSuggestion);
+    item.querySelector(".del").addEventListener("click", deleteSuggestion);
+    container.appendChild(item);
+  });
+}
