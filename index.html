@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WeatherFit Kenya</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>🌦️ WeatherFit Kenya – Smart Travel & Outfit Guide</header>
+
+    <div class="search-bar">
+      <input
+        type="text"
+        id="activity"
+        placeholder="Enter an activity (e.g. hike, relax)"
+      />
+      <button id="search-btn">Search Activity</button>
+    </div>
+
+    <div class="container">
+      <!-- Weather Cards Grid -->
+      <div id="weather-dashboard" class="weather-grid"></div>
+
+      <!-- Suggestions / Recommendation Panel -->
+      <div id="recommendation-panel"></div>
+
+      <!-- Admin Login -->
+      <button id="admin-login-btn">Admin Login</button>
+
+      <div id="admin-login-form" class="hidden">
+        <form id="login-form">
+          <label
+            >Username: <input type="text" id="admin-username" required
+          /></label>
+          <label
+            >Password: <input type="password" id="admin-password" required
+          /></label>
+          <button type="submit">Login</button>
+        </form>
+      </div>
+
+      <!-- Admin Panel -->
+      <div id="admin-panel" class="hidden">
+        <h3>Admin Suggestions Panel</h3>
+        <div id="admin-content"></div>
+      </div>
+    </div>
+
+    <script src="src/index.js"></script>
+  </body>
+</html>

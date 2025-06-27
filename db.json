@@ -1,0 +1,85 @@
+{
+  "suggestions": [
+    {
+      "id": 1,
+      "city": "Mombasa",
+      "weather": "Clear",
+      "activity": "beach",
+      "outfit": "shorts",
+      "idea": "swimming, boatriding"
+    },
+    {
+      "id": 2,
+      "city": "Naivasha",
+      "weather": "Light Rain",
+      "activity": "hiking",
+      "outfit": "Raincoat, boots",
+      "idea": "hot spring"
+    },
+    {
+      "city": "Nairobi",
+      "weather": "Partly cloudy",
+      "outfit": "hoodie",
+      "idea": "relative cold wear something to keep you warm",
+      "id": 3
+    },
+    {
+      "city": "Nairobi",
+      "weather": "Partly cloudy",
+      "outfit": "leather jackets",
+      "idea": "black",
+      "id": 4
+    },
+    {
+      "city": "Nairobi",
+      "weather": "Partly cloudy",
+      "outfit": "leather jackets",
+      "idea": "black",
+      "id": 5
+    },
+    {
+      "city": "Nairobi",
+      "weather": "Partly cloudy",
+      "outfit": "fluffy jackets",
+      "idea": "go take coffee",
+      "id": 6
+    },
+    {
+      "city": "Nanyuki",
+      "weather": "Patchy rain nearby",
+      "outfit": "leather jackets",
+      "idea": "go take coffee",
+      "id": 8
+    },
+    {
+      "city": "Naivasha",
+      "activity": "hiking",
+      "outfit": "leather jackets",
+      "idea": "Nature walk",
+      "id": 9
+    },
+    {
+      "city": "Naivasha",
+      "activity": "Boat riding",
+      "outfit": "Light windbreaker jacket",
+      "idea": "Explore Crescent Island",
+      "id": 10
+    },
+    {
+      "city": "Naivasha",
+      "weather": "Partly cloudy",
+      "activity": "Boat riding",
+      "outfit": "Light windbreaker jacket",
+      "idea": "Explore Crescent Island",
+      "id": 11
+    },
+    {
+      "city": "Garissa",
+      "weather": "Patchy rain nearby",
+      "activity": "camel riding",
+      "outfit": "vest",
+      "idea": "take a camel ride to desert",
+      "id": 12
+    }
+  ]
+}
