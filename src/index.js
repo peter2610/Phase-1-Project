@@ -142,3 +142,78 @@ function renderAdmin() {
     container.appendChild(item);
   });
 }
+
+// PATCH
+async function patchSuggestion(e) {
+  if (!isAdmin) return alert("Admin login required.");
+  const id = e.target.dataset.id;
+  const outfit = document.querySelector(`.outfit[data-id="${id}"]`).value;
+  const idea = document.querySelector(`.idea[data-id="${id}"]`).value;
+
+  await fetch(`http://localhost:3000/suggestions/${id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ outfit, idea })
+  });
+
+  await loadSuggestions();
+  renderAdmin();
+}
+
+// DELETE
+async function deleteSuggestion(e) {
+  if (!isAdmin) return alert("Admin login required.");
+  const id = e.target.dataset.id;
+
+  await fetch(`http://localhost:3000/suggestions/${id}`, {
+    method: "DELETE"
+  });
+
+  await loadSuggestions();
+  renderAdmin();
+}
+
+// Show all suggestions
+function showAllSuggestions() {
+  recPanel.innerHTML = "<h2>All Suggestions</h2>";
+  suggestions.forEach(s => {
+    const div = document.createElement("div");
+    div.className = "suggestion";
+    div.innerHTML = `
+      <h4>${s.city} - ${s.weather}</h4>
+      <p><strong>Activity:</strong> ${s.activity}</p>
+      <p><strong>Outfit:</strong> ${s.outfit}</p>
+      <p><strong>Task:</strong> ${s.idea}</p>
+    `;
+    recPanel.appendChild(div);
+  });
+}
+
+// Handle login
+loginBtn.addEventListener("click", () => {
+  loginForm.classList.toggle("hidden");
+});
+
+document.getElementById("login-form").addEventListener("submit", e => {
+  e.preventDefault();
+  const user = document.getElementById("admin-username").value;
+  const pass = document.getElementById("admin-password").value;
+
+  if (user === "admin" && pass === "1234") {
+    isAdmin = true;
+    adminPanel.classList.remove("hidden");
+    loginForm.classList.add("hidden");
+
+    logoutBtn.id = "logout-btn";
+    logoutBtn.textContent = "Log Out";
+    adminPanel.appendChild(logoutBtn);
+
+    logoutBtn.addEventListener("click", () => {
+      isAdmin = false;
+      adminPanel.classList.add("hidden");
+      logoutBtn.remove();
+    });
+  } else {
+    alert("Wrong credentials.");
+  }
+});
