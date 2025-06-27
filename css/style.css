@@ -42,3 +42,17 @@ header {
 .search-bar button:hover {
   background-color: #1f5d85;
 }
+
+/* Container and Grid */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 1em;
+}
+
+.weather-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1em;
+  margin-bottom: 2em;
+}
