@@ -213,3 +213,17 @@ header {
     margin-bottom: 0.5em;
   }
 }
+table {
+  font-family: Arial, sans-serif;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+

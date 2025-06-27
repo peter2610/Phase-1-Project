@@ -14,6 +14,7 @@ const logoutBtn = document.createElement("button");
 
 let suggestions = [];
 let isAdmin = false;
+let currentSuggestion = null;
 
 // Load all suggestions
 async function loadSuggestions() {
@@ -27,16 +28,46 @@ async function loadSuggestions() {
 
 // Get weather data
 async function getCityWeather(city) {
-  const res = await fetch(`https://wttr.in/${city}?format=j1`);
+  const coords = {
+    Nairobi: { lat: -1.2864, lon: 36.8172 },
+    Mombasa: { lat: -4.0435, lon: 39.6682 },
+    Kisumu: { lat: -0.0917, lon: 34.7680 },
+    Naivasha: { lat: -0.7177, lon: 36.4325 },
+    Eldoret: { lat: 0.5143, lon: 35.2698 },
+    Nanyuki: { lat: 0.0167, lon: 37.0667 },
+    Malindi: { lat: -3.2192, lon: 40.1169 },
+    Thika: { lat: -1.0333, lon: 37.0693 },
+    Garissa: { lat: -0.4532, lon: 39.6460 },
+    Kericho: { lat: -0.3675, lon: 35.2836 }
+  };
+
+  const { lat, lon } = coords[city];
+  const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
   const data = await res.json();
-  const current = data.current_condition[0];
+  const current = data.current_weather;
+
+  const weatherCodeMap = {
+    0: "Clear sky",
+    1: "Mainly clear",
+    2: "Partly cloudy",
+    3: "Overcast",
+    45: "Fog",
+    48: "Depositing rime fog",
+    51: "Light drizzle",
+    61: "Light rain",
+    71: "Light snow",
+    80: "Rain showers"
+    // You can add more codes if needed
+  };
+
   return {
     city,
-    temp: current.temp_C,
-    condition: current.weatherDesc[0].value,
+    temp: current.temperature,
+    condition: weatherCodeMap[current.weathercode] || `Code ${current.weathercode}`,
     icon: "https://img.icons8.com/fluency/48/000000/weather.png"
   };
 }
+
 
 // Display all cities
 async function displayWeather() {
@@ -136,52 +167,105 @@ function showAddForm(city, weather, activity = "", temp = "--") {
 function renderAdmin() {
   const container = document.getElementById("admin-content");
   container.innerHTML = "";
+
+  if (!document.getElementById("edit-form")) {
+    const editFormDiv = document.createElement("div");
+    editFormDiv.id = "edit-form";
+    editFormDiv.classList.add("hidden");
+    editFormDiv.innerHTML = `
+      <h3>Edit Suggestion</h3>
+      <form id="edit-suggestion-form">
+        <label for="edit-activity">Activity:</label>
+        <input id="edit-activity" name="activity" required /><br/>
+
+        <label for="edit-outfit">Outfit:</label>
+        <input id="edit-outfit" name="outfit" required /><br/>
+
+        <label for="edit-task">Task:</label>
+        <input id="edit-task" name="idea" required /><br/>
+    <button id="save-edit" type="button">Save Changes</button> 
+    <button type="button" id="cancel-edit">Cancel</button>
+      </form>
+    `;
+    container.appendChild(editFormDiv);
+  }
+
   suggestions.forEach(s => {
     const item = document.createElement("div");
     item.className = "admin-item";
     item.innerHTML = `
-      <p>
-        ${s.city} / ${s.weather} / ${s.activity}<br/>
-        Outfit: <input value="${s.outfit}" data-id="${s.id}" class="outfit"><br/>
-        Task: <input value="${s.idea}" data-id="${s.id}" class="idea"><br/>
-        <button class="patch" type="button" data-id="${s.id}">Edit</button>
-        <button class="del" type="button" data-id="${s.id}">Delete</button>
-      </p>
-    `;
-    item.querySelector(".patch").addEventListener("click", patchSuggestion);
+    <div class="admin-item-box">
+      <strong>${s.city}</strong> / ${s.weather}<br/>
+      Activity: ${s.activity}<br/>
+      Outfit: ${s.outfit}<br/>
+      Task: ${s.idea}<br/>
+      <button class="patch" type="button" data-id="${s.id}">Edit</button>
+      <button class="del" type="button" data-id="${s.id}">Delete</button>
+    </div>
+  `;
+    item.querySelector(".patch").addEventListener("click", () => {
+      currentSuggestion = s;
+      document.getElementById("edit-activity").value = s.activity;
+      document.getElementById("edit-outfit").value = s.outfit;
+      document.getElementById("edit-task").value = s.idea;
+      document.getElementById("edit-form").classList.remove("hidden");
+    });
     item.querySelector(".del").addEventListener("click", deleteSuggestion);
     container.appendChild(item);
   });
 }
 
-// PATCH
-async function patchSuggestion(e) {
-  if (!isAdmin) return alert("Admin login required.");
-  const id = e.target.dataset.id;
-  const outfit = document.querySelector(`.outfit[data-id="${id}"]`).value;
-  const idea = document.querySelector(`.idea[data-id="${id}"]`).value;
+// PATCH Handler
 
-  await fetch(`http://localhost:3000/suggestions/${id}`, {
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ outfit, idea })
-  });
+document.addEventListener("click", async (e) => {
+  if (e.target && e.target.id === "save-edit") {
+    if (!currentSuggestion) return;
 
-  await loadSuggestions();
-  renderAdmin();
-}
+    const updatedData = {
+      activity: document.getElementById("edit-activity").value.trim(),
+      outfit: document.getElementById("edit-outfit").value.trim(),
+      idea: document.getElementById("edit-task").value.trim()
+    };
+
+    await fetch(`http://localhost:3000/suggestions/${currentSuggestion.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(updatedData)
+    });
+
+    alert("Suggestion updated successfully.");
+    currentSuggestion = null;
+    document.getElementById("edit-form").classList.add("hidden");
+    await loadSuggestions();
+    renderAdmin();
+  }
+});
+
+
+// Cancel Button
+
+document.addEventListener("click", (e) => {
+  if (e.target && e.target.id === "cancel-edit") {
+    currentSuggestion = null;
+    document.getElementById("edit-form").classList.add("hidden");
+  }
+});
 
 // DELETE
 async function deleteSuggestion(e) {
   if (!isAdmin) return alert("Admin login required.");
   const id = e.target.dataset.id;
 
-  await fetch(`http://localhost:3000/suggestions/${id}`, {
-    method: "DELETE"
-  });
-
-  await loadSuggestions();
-  renderAdmin();
+  if (confirm("Are you sure you want to delete this suggestion?")) {
+    await fetch(`http://localhost:3000/suggestions/${id}`, {
+      method: "DELETE"
+    });
+    alert("Suggestion deleted.");
+    await loadSuggestions();
+    renderAdmin();
+  }
 }
 
 // Login
@@ -228,7 +312,6 @@ async function handleSearch(e) {
     return alert("No cities found with that activity.");
   }
 
-  // Clear previous results
   recPanel.innerHTML = `<h2>Activity: ${activity}</h2>`;
 
   for (const match of matches) {
@@ -253,7 +336,6 @@ async function handleSearch(e) {
   recPanel.scrollIntoView({ behavior: "smooth" });
 }
 
-
 // Init
 document.addEventListener("DOMContentLoaded", async () => {
   if (localStorage.getItem("isAdmin") === "true") {
@@ -263,6 +345,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       logoutBtn.id = "logout-btn";
       logoutBtn.textContent = "Log Out";
       adminPanel.appendChild(logoutBtn);
+      logoutBtn.type = "button";
       logoutBtn.addEventListener("click", () => {
         isAdmin = false;
         localStorage.removeItem("isAdmin");
@@ -276,4 +359,24 @@ document.addEventListener("DOMContentLoaded", async () => {
   await displayWeather();
   renderAdmin();
   searchBtn.addEventListener("click", handleSearch);
+  // ✅ Global Safety Net
+// 🔒 Prevent accidental form submits from reloading page
+document.addEventListener("submit", function (e) {
+  e.preventDefault();
+});
+
+// 🔒 Prevent all anchor tags like <a href="#"> from causing reload
+document.addEventListener("click", function (e) {
+  if (e.target.tagName === "A" && e.target.getAttribute("href") === "#") {
+    e.preventDefault();
+  }
+});
+
+// 🔒 Prevent <button> without type from defaulting to 'submit'
+document.addEventListener("click", function (e) {
+  if (e.target.tagName === "BUTTON" && !e.target.hasAttribute("type")) {
+    e.target.setAttribute("type", "button");
+  }
+});
+
 });

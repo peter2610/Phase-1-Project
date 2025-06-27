@@ -231,6 +231,110 @@
       "outfit": "Active wear, helmet",
       "idea": "Ride through green highlands",
       "id": 29
+    },
+    {
+      "city": "Garissa",
+      "weather": "Sunny",
+      "activity": "camel riding",
+      "outfit": "vest",
+      "idea": "take a camel ride to desert",
+      "id": 30
+    },
+    {
+      "city": "Kisumu",
+      "weather": "Patchy rain nearby",
+      "activity": "relaxing",
+      "outfit": "light clothes",
+      "idea": "relax at dunga hill camp",
+      "id": 31
+    },
+    {
+      "city": "Mombasa",
+      "weather": "Partly cloudy",
+      "activity": "swimming",
+      "outfit": "swimsuit,",
+      "idea": "swim at nyali beach",
+      "id": 32
+    },
+    {
+      "city": "Garissa",
+      "weather": "Clear",
+      "activity": "camel riding",
+      "outfit": "vest",
+      "idea": "take a camel ride to desert",
+      "id": 33
+    },
+    {
+      "city": "Kericho",
+      "weather": "Patchy rain nearby",
+      "activity": "Tea Farm Tour",
+      "outfit": "Raincoat, boots",
+      "idea": "Walk through tea plantations",
+      "id": 34
+    },
+    {
+      "city": "Nairobi",
+      "weather": "Rain showers",
+      "activity": "Hiking",
+      "outfit": "Hiking boots, jacket",
+      "idea": "Climb Mt. Longonot",
+      "id": 35
+    },
+    {
+      "city": "Kisumu",
+      "weather": "Overcast",
+      "activity": "| Relaxing",
+      "outfit": "Light clothing",
+      "idea": "Relax at Dunga Hill Camp",
+      "id": 36
+    },
+    {
+      "city": "Naivasha",
+      "weather": "Overcast",
+      "activity": "Camping",
+      "outfit": "Warm jacket, boots",
+      "idea": "Camp at Hell’s Gate Park",
+      "id": 37
+    },
+    {
+      "city": "Eldoret",
+      "weather": "Mainly clear",
+      "activity": "Trail running",
+      "outfit": "Running shoes, shorts",
+      "idea": "Run Kapchorwa trail",
+      "id": 38
+    },
+    {
+      "city": "Nanyuki",
+      "weather": "Overcast",
+      "activity": "Trekking",
+      "outfit": "Backpack, hiking gear",
+      "idea": "Trek Mt. Kenya base camp",
+      "id": 39
+    },
+    {
+      "city": "Malindi",
+      "weather": "Overcast",
+      "activity": "Beach Walk",
+      "outfit": ": Light cotton shirt, shorts, sandals",
+      "idea": "Stroll along Malindi Beach",
+      "id": 40
+    },
+    {
+      "city": "Garissa",
+      "weather": "Overcast",
+      "activity": "camel riding",
+      "outfit": "Loose-fitting clothes, scarf",
+      "idea": "take a camel ride to desert",
+      "id": 41
+    },
+    {
+      "city": "Kericho",
+      "weather": "Partly cloudy",
+      "activity": "Tea Farm Tour",
+      "outfit": "Raincoat, boots",
+      "idea": "Walk through tea plantations",
+      "id": 42
     }
   ]
 }
