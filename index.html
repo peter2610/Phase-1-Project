@@ -3,39 +3,43 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WeatherFit Kenya</title>
+    <title>PapiFit Kenya</title>
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <header>🌦️ WeatherFit Kenya – Smart Travel & Outfit Guide</header>
+    <header>🌦️ PapiFit Kenya – Smart Travel & Outfit Guide</header>
 
+    <!-- Search Section -->
     <div class="search-bar">
       <input
         type="text"
         id="activity"
-        placeholder="Enter an activity (e.g. hike, relax)"
+        placeholder="Enter an activity (e.g. relax, hike)"
       />
       <button id="search-btn">Search Activity</button>
     </div>
 
+    <!-- Main Content -->
     <div class="container">
-      <!-- Weather Cards Grid -->
+      <!-- Weather Icons Grid -->
       <div id="weather-dashboard" class="weather-grid"></div>
 
-      <!-- Suggestions / Recommendation Panel -->
+      <!-- Recommendation Panel -->
       <div id="recommendation-panel"></div>
 
-      <!-- Admin Login -->
+      <!-- Admin Login Button -->
       <button id="admin-login-btn">Admin Login</button>
 
+      <!-- Login Form -->
       <div id="admin-login-form" class="hidden">
         <form id="login-form">
           <label
-            >Username: <input type="text" id="admin-username" required
-          /></label>
+            >Username: <input type="text" id="admin-username" required /></label
+          ><br />
           <label
-            >Password: <input type="password" id="admin-password" required
-          /></label>
+            >Password:
+            <input type="password" id="admin-password" required /></label
+          ><br />
           <button type="submit">Login</button>
         </form>
       </div>

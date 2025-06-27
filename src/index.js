@@ -1,3 +1,4 @@
+// index.js
 const cities = [
   "Nairobi", "Mombasa", "Kisumu", "Naivasha", "Eldoret",
   "Nanyuki", "Malindi", "Thika", "Garissa", "Kericho"
@@ -14,13 +15,17 @@ const logoutBtn = document.createElement("button");
 let suggestions = [];
 let isAdmin = false;
 
-// Load suggestions
+// Load all suggestions
 async function loadSuggestions() {
-  const res = await fetch("http://localhost:3000/suggestions");
-  suggestions = await res.json();
+  try {
+    const res = await fetch("http://localhost:3000/suggestions");
+    suggestions = await res.json();
+  } catch (err) {
+    console.error("Failed to load suggestions:", err);
+  }
 }
 
-// Weather API
+// Get weather data
 async function getCityWeather(city) {
   const res = await fetch(`https://wttr.in/${city}?format=j1`);
   const data = await res.json();
@@ -33,7 +38,7 @@ async function getCityWeather(city) {
   };
 }
 
-// Display weather cards
+// Display all cities
 async function displayWeather() {
   dashboard.innerHTML = "";
   for (const city of cities) {
@@ -43,22 +48,21 @@ async function displayWeather() {
       card.className = "weather-card";
       card.innerHTML = `
         <h3>${weather.city}</h3>
-        <img 
-          src="${weather.icon}" 
-          alt="${weather.condition}" 
-          class="weather-icon"
-          data-city="${weather.city}"
-          data-temp="${weather.temp}"
-          data-condition="${weather.condition}"
-        />
+        <img src="${weather.icon}" alt="${weather.condition}" 
+             class="weather-icon"
+             data-city="${weather.city}"
+             data-temp="${weather.temp}"
+             data-condition="${weather.condition}" />
         <p>${weather.temp}°C - ${weather.condition}</p>
-        <button data-city="${weather.city}" data-weather="${weather.condition}">See Suggestions</button>
+        <button data-city="${weather.city}" data-weather="${weather.condition}">
+          See Suggestions
+        </button>
       `;
       card.querySelector("img").addEventListener("click", () => showRecommendation(weather));
       card.querySelector("button").addEventListener("click", () => showRecommendation(weather));
       dashboard.appendChild(card);
-    } catch (err) {
-      console.error("Weather fetch failed:", err);
+    } catch (error) {
+      console.warn(`Could not fetch weather for ${city}`, error);
     }
   }
 }
@@ -66,7 +70,10 @@ async function displayWeather() {
 // Show single recommendation
 function showRecommendation(weather) {
   const { city, temp, condition } = weather;
-  const match = suggestions.find(s => s.city === city && s.weather === condition);
+  const match = suggestions.find(s =>
+    s.city === city &&
+    s.weather.toLowerCase() === condition.toLowerCase()
+  );
 
   recPanel.innerHTML = `
     <div class="recommendation-card" id="recommendation-card">
@@ -75,28 +82,32 @@ function showRecommendation(weather) {
       <p><strong>Outfit:</strong> ${match?.outfit || "N/A"}</p>
       <p><strong>Task:</strong> ${match?.idea || "N/A"}</p>
       <button id="suggest-btn">Add Suggestion</button>
-      <button id="show-all-btn">Show All Suggestions</button>
     </div>
   `;
 
   document.getElementById("suggest-btn").addEventListener("click", () =>
-    showAddForm(city, condition, match?.activity || "")
+    showAddForm(city, condition, match?.activity || "", temp)
   );
-
-  document.getElementById("show-all-btn").addEventListener("click", showAllSuggestions);
 
   document.getElementById("recommendation-card").scrollIntoView({ behavior: "smooth" });
 }
 
-// Add suggestion
-function showAddForm(city, weather, activity = "") {
+// Add suggestion form
+function showAddForm(city, weather, activity = "", temp = "--") {
   const form = document.createElement("form");
   form.innerHTML = `
-    <label>Activity: <input name="activity" value="${activity}" required></label><br/>
-    <label>Outfit: <input name="outfit" required></label><br/>
-    <label>Task: <input name="idea" required></label><br/>
-    <button type="submit">Submit</button>
-  `;
+  <label for="activity">Activity:</label>
+  <input id="activity" name="activity" value="${activity}" required><br/>
+
+  <label for="outfit">Outfit:</label>
+  <input id="outfit" name="outfit" required><br/>
+
+  <label for="idea">Task:</label>
+  <input id="idea" name="idea" required><br/>
+
+  <button type="submit">Submit</button>
+`;
+
   recPanel.appendChild(form);
 
   form.addEventListener("submit", async e => {
@@ -117,11 +128,11 @@ function showAddForm(city, weather, activity = "") {
 
     await loadSuggestions();
     form.remove();
-    showRecommendation({ city, temp: "--", condition: weather });
+    showRecommendation({ city, temp, condition: weather });
   });
 }
 
-// Admin view
+// Admin area
 function renderAdmin() {
   const container = document.getElementById("admin-content");
   container.innerHTML = "";
@@ -173,23 +184,7 @@ async function deleteSuggestion(e) {
   renderAdmin();
 }
 
-// Show all suggestions
-function showAllSuggestions() {
-  recPanel.innerHTML = "<h2>All Suggestions</h2>";
-  suggestions.forEach(s => {
-    const div = document.createElement("div");
-    div.className = "suggestion";
-    div.innerHTML = `
-      <h4>${s.city} - ${s.weather}</h4>
-      <p><strong>Activity:</strong> ${s.activity}</p>
-      <p><strong>Outfit:</strong> ${s.outfit}</p>
-      <p><strong>Task:</strong> ${s.idea}</p>
-    `;
-    recPanel.appendChild(div);
-  });
-}
-
-// Handle login
+// Login
 loginBtn.addEventListener("click", () => {
   loginForm.classList.toggle("hidden");
 });
@@ -201,38 +196,84 @@ document.getElementById("login-form").addEventListener("submit", e => {
 
   if (user === "admin" && pass === "1234") {
     isAdmin = true;
+    localStorage.setItem("isAdmin", "true");
     adminPanel.classList.remove("hidden");
     loginForm.classList.add("hidden");
 
-    logoutBtn.id = "logout-btn";
-    logoutBtn.textContent = "Log Out";
-    adminPanel.appendChild(logoutBtn);
-
-    logoutBtn.addEventListener("click", () => {
-      isAdmin = false;
-      adminPanel.classList.add("hidden");
-      logoutBtn.remove();
-    });
+    if (!document.getElementById("logout-btn")) {
+      logoutBtn.id = "logout-btn";
+      logoutBtn.textContent = "Log Out";
+      adminPanel.appendChild(logoutBtn);
+      logoutBtn.addEventListener("click", () => {
+        isAdmin = false;
+        localStorage.removeItem("isAdmin");
+        adminPanel.classList.add("hidden");
+        logoutBtn.remove();
+      });
+    }
   } else {
     alert("Wrong credentials.");
   }
 });
 
-// Search
-function handleSearch(e) {
+// Search by activity
+async function handleSearch(e) {
   e.preventDefault();
   const activity = document.getElementById("activity").value.trim().toLowerCase();
   if (!activity) return alert("Please enter an activity.");
-  const match = suggestions.find(s => s.activity.toLowerCase() === activity);
-  if (!match) return alert("No match found.");
-  showRecommendation(match);
+
+  const matches = suggestions.filter(s => s.activity.toLowerCase() === activity);
+
+  if (matches.length === 0) {
+    return alert("No cities found with that activity.");
+  }
+
+  // Clear previous results
+  recPanel.innerHTML = `<h2>Activity: ${activity}</h2>`;
+
+  for (const match of matches) {
+    const weather = await getCityWeather(match.city);
+    const card = document.createElement("div");
+    card.className = "recommendation-card";
+    card.innerHTML = `
+      <h3>${weather.city} - ${weather.temp}°C ${weather.condition}</h3>
+      <p><strong>Activity:</strong> ${match.activity}</p>
+      <p><strong>Outfit:</strong> ${match.outfit}</p>
+      <p><strong>Task:</strong> ${match.idea}</p>
+      <button data-city="${match.city}" data-weather="${match.weather}">Suggest Another</button>
+    `;
+
+    card.querySelector("button").addEventListener("click", () =>
+      showAddForm(match.city, match.weather, match.activity, weather.temp)
+    );
+
+    recPanel.appendChild(card);
+  }
+
+  recPanel.scrollIntoView({ behavior: "smooth" });
 }
+
 
 // Init
 document.addEventListener("DOMContentLoaded", async () => {
+  if (localStorage.getItem("isAdmin") === "true") {
+    isAdmin = true;
+    adminPanel.classList.remove("hidden");
+    if (!document.getElementById("logout-btn")) {
+      logoutBtn.id = "logout-btn";
+      logoutBtn.textContent = "Log Out";
+      adminPanel.appendChild(logoutBtn);
+      logoutBtn.addEventListener("click", () => {
+        isAdmin = false;
+        localStorage.removeItem("isAdmin");
+        adminPanel.classList.add("hidden");
+        logoutBtn.remove();
+      });
+    }
+  }
+
   await loadSuggestions();
   await displayWeather();
   renderAdmin();
   searchBtn.addEventListener("click", handleSearch);
 });
-

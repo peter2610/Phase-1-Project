@@ -1,85 +1,236 @@
 {
   "suggestions": [
     {
-      "id": 1,
-      "city": "Mombasa",
-      "weather": "Clear",
-      "activity": "beach",
-      "outfit": "shorts",
-      "idea": "swimming, boatriding"
-    },
-    {
-      "id": 2,
-      "city": "Naivasha",
-      "weather": "Light Rain",
-      "activity": "hiking",
-      "outfit": "Raincoat, boots",
-      "idea": "hot spring"
-    },
-    {
-      "city": "Nairobi",
-      "weather": "Partly cloudy",
-      "outfit": "hoodie",
-      "idea": "relative cold wear something to keep you warm",
-      "id": 3
-    },
-    {
-      "city": "Nairobi",
-      "weather": "Partly cloudy",
-      "outfit": "leather jackets",
-      "idea": "black",
-      "id": 4
-    },
-    {
-      "city": "Nairobi",
-      "weather": "Partly cloudy",
-      "outfit": "leather jackets",
-      "idea": "black",
-      "id": 5
-    },
-    {
-      "city": "Nairobi",
-      "weather": "Partly cloudy",
-      "outfit": "fluffy jackets",
-      "idea": "go take coffee",
-      "id": 6
-    },
-    {
-      "city": "Nanyuki",
-      "weather": "Patchy rain nearby",
-      "outfit": "leather jackets",
-      "idea": "go take coffee",
-      "id": 8
-    },
-    {
-      "city": "Naivasha",
-      "activity": "hiking",
-      "outfit": "leather jackets",
-      "idea": "Nature walk",
-      "id": 9
-    },
-    {
-      "city": "Naivasha",
-      "activity": "Boat riding",
-      "outfit": "Light windbreaker jacket",
-      "idea": "Explore Crescent Island",
-      "id": 10
-    },
-    {
-      "city": "Naivasha",
-      "weather": "Partly cloudy",
-      "activity": "Boat riding",
-      "outfit": "Light windbreaker jacket",
-      "idea": "Explore Crescent Island",
-      "id": 11
-    },
-    {
       "city": "Garissa",
       "weather": "Patchy rain nearby",
       "activity": "camel riding",
       "outfit": "vest",
       "idea": "take a camel ride to desert",
+      "id": 1
+    },
+    {
+      "city": "Naivasha",
+      "weather": "Sunny",
+      "activity": "Boat riding",
+      "outfit": "Light windbreaker jacket",
+      "idea": "Explore Crescent Island",
+      "id": 2
+    },
+    {
+      "city": "Nairobi",
+      "weather": "Partly cloudy",
+      "activity": "hiking",
+      "outfit": "hiking boots, jacket",
+      "idea": "climb ngong hills",
+      "id": 3
+    },
+    {
+      "city": "Nairobi",
+      "weather": "Partly cloudy",
+      "activity": "urban exploring",
+      "outfit": "sneakers,cap",
+      "idea": "tour nairobi railway museum",
+      "id": 4
+    },
+    {
+      "city": "Nairobi",
+      "weather": "Partly cloudy",
+      "activity": "picnicking",
+      "outfit": "casual wear,sandals",
+      "idea": "picnic at karura forest",
+      "id": 5
+    },
+    {
+      "city": "Mombasa",
+      "weather": "Patchy rain nearby",
+      "activity": "swimming",
+      "outfit": "swimsuit,",
+      "idea": "swim at nyali beach",
+      "id": 6
+    },
+    {
+      "city": "Mombasa",
+      "weather": "Patchy rain nearby",
+      "activity": "snorkeling",
+      "outfit": "swimsuit,goggles",
+      "idea": "explore coral gardens",
+      "id": 7
+    },
+    {
+      "city": "Mombasa",
+      "weather": "Patchy rain nearby",
+      "activity": "beach walk",
+      "outfit": "flip-flops",
+      "idea": "stroll along diani beach",
+      "id": 8
+    },
+    {
+      "city": "Kisumu",
+      "weather": "Sunny",
+      "activity": "relaxing",
+      "outfit": "light clothes",
+      "idea": "relax at dunga hill camp",
+      "id": 9
+    },
+    {
+      "city": "Kisumu",
+      "weather": "Sunny",
+      "activity": "boating",
+      "outfit": "casual wear,hat",
+      "idea": "boat ride on lake victoria",
+      "id": 10
+    },
+    {
+      "city": "Kisumu",
+      "weather": "Sunny",
+      "activity": "bird watching",
+      "outfit": "binoculars,sunhat",
+      "idea": "spot birds at impla sanctuary",
+      "id": 11
+    },
+    {
+      "city": "Naivasha",
+      "weather": "Sunny",
+      "activity": "camping",
+      "outfit": "warm jackets,boots",
+      "idea": "camp at hell`s gate park",
       "id": 12
+    },
+    {
+      "city": "Naivasha",
+      "weather": "Sunny",
+      "activity": "hiking",
+      "outfit": "hiking shoes",
+      "idea": "hike hell`s gate gorge",
+      "id": 13
+    },
+    {
+      "city": "Nanyuki",
+      "weather": "Patchy rain nearby",
+      "activity": "trekking",
+      "outfit": "hiking gear, backpack",
+      "idea": "trek mt.kenya",
+      "id": 14
+    },
+    {
+      "city": "Nanyuki",
+      "weather": "Patchy rain nearby",
+      "activity": "wildlife safari",
+      "outfit": "safari outfits,camera",
+      "idea": "game park drive",
+      "id": 15
+    },
+    {
+      "city": "Nanyuki",
+      "weather": "Patchy rain nearby",
+      "activity": "horse riding",
+      "outfit": "helmet, riding boots",
+      "idea": "ride at mt.kenya trails",
+      "id": 16
+    },
+    {
+      "city": "Malindi",
+      "weather": "Partly cloudy",
+      "activity": "beach walk",
+      "outfit": "Light cotton shirt, shorts, sandals",
+      "idea": "Stroll along Malindi Beach",
+      "id": 17
+    },
+    {
+      "city": "Malindi",
+      "weather": "Partly cloudy",
+      "activity": "Historical Tour",
+      "outfit": "Casual wear, sunhat",
+      "idea": "Visit Vasco da Gama Pillar",
+      "id": 18
+    },
+    {
+      "city": "Malindi",
+      "weather": "Partly cloudy",
+      "activity": "Picnic",
+      "outfit": "Comfortable clothes, sneakers",
+      "idea": "Picnic at Ol Donyo Sabuk Park",
+      "id": 19
+    },
+    {
+      "city": "Eldoret",
+      "weather": "Partly cloudy",
+      "activity": "Trail running",
+      "outfit": "Running shoes, shorts",
+      "idea": "Run Kapchorwa trail",
+      "id": 20
+    },
+    {
+      "city": "Eldoret",
+      "weather": "Partly cloudy",
+      "activity": "Cultural visit",
+      "outfit": "Modest dress, sandals",
+      "idea": "Visit Kalenjin Heritage Centre",
+      "id": 21
+    },
+    {
+      "city": "Eldoret",
+      "weather": "Partly cloudy",
+      "activity": "Nature walk",
+      "outfit": "Sneakers, sunblock",
+      "idea": "Walk through Sosiani River Park",
+      "id": 22
+    },
+    {
+      "city": "Thika",
+      "weather": "Partly cloudy",
+      "activity": "Nature Hike",
+      "outfit": "Sport shoes, t-shirt, light jacket",
+      "idea": "Hike at Fourteen Falls",
+      "id": 23
+    },
+    {
+      "city": "Thika",
+      "weather": "Partly cloudy",
+      "activity": "Photography",
+      "outfit": "Jeans, backpack, cap",
+      "idea": "Capture Thika’s lush landscapes",
+      "id": 24
+    },
+    {
+      "city": "Garissa",
+      "weather": "Patchy rain nearby",
+      "activity": "Cultural Visit",
+      "outfit": "Respectful traditional attire",
+      "idea": "Explore Garissa Heritage Centre",
+      "id": 25
+    },
+    {
+      "city": "Garissa",
+      "weather": "Patchy rain nearby",
+      "activity": "Sunset Watch",
+      "outfit": "Light evening wear",
+      "idea": "Watch sunset near Tana River",
+      "id": 26
+    },
+    {
+      "city": "Kericho",
+      "weather": "Sunny",
+      "activity": "Tea Farm Tour",
+      "outfit": "Raincoat, boots",
+      "idea": "Walk through tea plantations",
+      "id": 27
+    },
+    {
+      "city": "Kericho",
+      "weather": "Sunny",
+      "activity": "Bird Watching",
+      "outfit": "Earth-toned clothes, hat",
+      "idea": "Spot birds near Mau Forest",
+      "id": 28
+    },
+    {
+      "city": "Kericho",
+      "weather": "Sunny",
+      "activity": "Cycling",
+      "outfit": "Active wear, helmet",
+      "idea": "Ride through green highlands",
+      "id": 29
     }
   ]
 }

@@ -15,6 +15,7 @@ header {
   text-align: center;
   font-size: 1.5em;
 }
+
 /* Search bar */
 .search-bar {
   text-align: center;
@@ -64,22 +65,17 @@ header {
   border-radius: 10px;
   text-align: center;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease-in-out;
 }
 
 .weather-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 .weather-card img {
   cursor: pointer;
   width: 50px;
   height: 50px;
-  transition: transform 0.2s ease-in-out;
-}
-
-.weather-card img:hover {
-  transform: scale(1.1);
 }
 
 .weather-card button {
@@ -124,7 +120,7 @@ header {
   background-color: #d35400;
 }
 
-/* Admin Section */
+/* Admin */
 #admin-login-btn {
   display: block;
   margin: 2em auto 1em;
@@ -161,21 +157,6 @@ header {
   margin-top: 1em;
 }
 
-#logout-btn {
-  display: block;
-  margin: 1em auto;
-  padding: 0.5em 1em;
-  background-color: #c0392b;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#logout-btn:hover {
-  background-color: #962d22;
-}
-
 #admin-panel {
   background-color: #fff;
   padding: 1em;
@@ -201,7 +182,6 @@ header {
 .admin-item button {
   margin-right: 0.5em;
   padding: 0.4em 0.8em;
-  background-color: #c0392b;
   color: white;
   border: none;
   border-radius: 4px;
@@ -212,12 +192,8 @@ header {
   background-color: #27ae60;
 }
 
-.admin-item button.patch:hover {
-  background-color: #219150;
-}
-
-.admin-item button.del:hover {
-  background-color: #962d22;
+.admin-item button.del {
+  background-color: #c0392b;
 }
 
 /* Utility */
@@ -225,7 +201,7 @@ header {
   display: none;
 }
 
-/* Responsive */
+/* Responsive Design */
 @media screen and (max-width: 768px) {
   .weather-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -233,11 +209,7 @@ header {
 
   .search-bar input,
   .search-bar button {
-    width: 90%;
-    margin: 0.3em 0;
-  }
-
-  #admin-login-form input {
-    width: 90%;
+    width: 80%;
+    margin-bottom: 0.5em;
   }
 }
