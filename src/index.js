@@ -217,3 +217,22 @@ document.getElementById("login-form").addEventListener("submit", e => {
     alert("Wrong credentials.");
   }
 });
+
+// Search
+function handleSearch(e) {
+  e.preventDefault();
+  const activity = document.getElementById("activity").value.trim().toLowerCase();
+  if (!activity) return alert("Please enter an activity.");
+  const match = suggestions.find(s => s.activity.toLowerCase() === activity);
+  if (!match) return alert("No match found.");
+  showRecommendation(match);
+}
+
+// Init
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadSuggestions();
+  await displayWeather();
+  renderAdmin();
+  searchBtn.addEventListener("click", handleSearch);
+});
+
