@@ -1,23 +1,20 @@
 const express = require("express");
-const app = express();
 const cors = require("cors");
-const bodyParser = require("body-parser");
 const path = require("path");
+const app = express();
 
-// Middleware
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
-// Serve static files from 'public'
+// Serve frontend files from public/
 app.use(express.static(path.join(__dirname, "public")));
 
-// Fallback route to index.html
+// Catch-all route (SPA support)
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// Port from Render
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
-  console.log(`✅ Server is running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
