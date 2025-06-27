@@ -3,6 +3,22 @@
   "version": "1.0.0",
   "description": "PapiFit Kenya – Smart Travel & Outfit Guide",
   "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peter2610/Phase-1-Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/peter2610/Phase-1-Project/issues"
+  },
+  "homepage": "https://github.com/peter2610/Phase-1-Project#readme",
   "dependencies": {
     "accepts": "^2.0.0",
     "body-parser": "^2.2.0",
@@ -73,21 +89,5 @@
     "unpipe": "^1.0.0",
     "vary": "^1.1.2",
     "wrappy": "^1.0.2"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/peter2610/Phase-1-Project.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/peter2610/Phase-1-Project/issues"
-  },
-  "homepage": "https://github.com/peter2610/Phase-1-Project#readme"
+  }
 }
