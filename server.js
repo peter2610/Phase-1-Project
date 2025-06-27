@@ -4,21 +4,19 @@ const path = require("path");
 
 const app = express();
 
-// Middleware setup
 app.use(cors());
 app.use(express.json());
 
-// Serve static frontend files from the "public" directory
+// Serve static files from the "public" folder
 app.use(express.static(path.join(__dirname, "public")));
 
-// Catch-all route for SPA (Single Page Application) support
+// Handle all other routes (SPA fallback)
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// Define the port (Render uses PORT env variable)
+// Start server on PORT from Render
 const PORT = process.env.PORT || 10000;
-
 app.listen(PORT, () => {
-  console.log(`✅ Server is running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
