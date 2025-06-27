@@ -62,3 +62,62 @@ async function displayWeather() {
     }
   }
 }
+
+// Show single recommendation
+function showRecommendation(weather) {
+  const { city, temp, condition } = weather;
+  const match = suggestions.find(s => s.city === city && s.weather === condition);
+
+  recPanel.innerHTML = `
+    <div class="recommendation-card" id="recommendation-card">
+      <h2>${city} - ${temp}°C ${condition}</h2>
+      <p><strong>Activity:</strong> ${match?.activity || "N/A"}</p>
+      <p><strong>Outfit:</strong> ${match?.outfit || "N/A"}</p>
+      <p><strong>Task:</strong> ${match?.idea || "N/A"}</p>
+      <button id="suggest-btn">Add Suggestion</button>
+      <button id="show-all-btn">Show All Suggestions</button>
+    </div>
+  `;
+
+  document.getElementById("suggest-btn").addEventListener("click", () =>
+    showAddForm(city, condition, match?.activity || "")
+  );
+
+  document.getElementById("show-all-btn").addEventListener("click", showAllSuggestions);
+
+  document.getElementById("recommendation-card").scrollIntoView({ behavior: "smooth" });
+}
+
+// Add suggestion
+function showAddForm(city, weather, activity = "") {
+  const form = document.createElement("form");
+  form.innerHTML = `
+    <label>Activity: <input name="activity" value="${activity}" required></label><br/>
+    <label>Outfit: <input name="outfit" required></label><br/>
+    <label>Task: <input name="idea" required></label><br/>
+    <button type="submit">Submit</button>
+  `;
+  recPanel.appendChild(form);
+
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    const newSug = {
+      city,
+      weather,
+      activity: e.target.activity.value.trim(),
+      outfit: e.target.outfit.value.trim(),
+      idea: e.target.idea.value.trim()
+    };
+
+    await fetch("http://localhost:3000/suggestions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newSug)
+    });
+
+    await loadSuggestions();
+    form.remove();
+    showRecommendation({ city, temp: "--", condition: weather });
+  });
+}
+
