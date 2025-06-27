@@ -1,14 +1,6 @@
 {
   "suggestions": [
     {
-      "city": "Garissa",
-      "weather": "Patchy rain nearby",
-      "activity": "camel riding",
-      "outfit": "vest",
-      "idea": "take a camel ride to desert",
-      "id": 1
-    },
-    {
       "city": "Naivasha",
       "weather": "Sunny",
       "activity": "Boat riding",
@@ -263,14 +255,6 @@
       "outfit": "vest",
       "idea": "take a camel ride to desert",
       "id": 33
-    },
-    {
-      "city": "Kericho",
-      "weather": "Patchy rain nearby",
-      "activity": "Tea Farm Tour",
-      "outfit": "Raincoat, boots",
-      "idea": "Walk through tea plantations",
-      "id": 34
     },
     {
       "city": "Nairobi",

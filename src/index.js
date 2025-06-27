@@ -68,7 +68,6 @@ async function getCityWeather(city) {
   };
 }
 
-
 // Display all cities
 async function displayWeather() {
   dashboard.innerHTML = "";
@@ -183,8 +182,8 @@ function renderAdmin() {
 
         <label for="edit-task">Task:</label>
         <input id="edit-task" name="idea" required /><br/>
-    <button id="save-edit" type="button">Save Changes</button> 
-    <button type="button" id="cancel-edit">Cancel</button>
+        <button type="submit">Save Changes</button>
+        <button type="button" id="cancel-edit">Cancel</button>
       </form>
     `;
     container.appendChild(editFormDiv);
@@ -217,8 +216,9 @@ function renderAdmin() {
 
 // PATCH Handler
 
-document.addEventListener("click", async (e) => {
-  if (e.target && e.target.id === "save-edit") {
+document.addEventListener("submit", async (e) => {
+  if (e.target && e.target.id === "edit-suggestion-form") {
+    e.preventDefault();
     if (!currentSuggestion) return;
 
     const updatedData = {
@@ -242,7 +242,6 @@ document.addEventListener("click", async (e) => {
     renderAdmin();
   }
 });
-
 
 // Cancel Button
 
