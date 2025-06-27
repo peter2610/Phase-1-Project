@@ -219,3 +219,25 @@ header {
 .admin-item button.del:hover {
   background-color: #962d22;
 }
+
+/* Utility */
+.hidden {
+  display: none;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .weather-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .search-bar input,
+  .search-bar button {
+    width: 90%;
+    margin: 0.3em 0;
+  }
+
+  #admin-login-form input {
+    width: 90%;
+  }
+}
