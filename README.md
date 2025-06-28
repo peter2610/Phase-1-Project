@@ -191,7 +191,7 @@ Admin
 ## How to Run the App Locally
 
 .Clone the Repository
-git clone
+-git clone
 . Start JSON Server
 npm install -g json-server
 json-server --watch suggestions.json
