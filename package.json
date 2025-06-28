@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "PapiFit Kenya – Smart Travel & Outfit Guide",
   "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+ "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "json-server --watch db.json --port $PORT"
   },
   "repository": {
     "type": "git",
