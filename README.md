@@ -7,11 +7,36 @@ Live Demo:
 License: MIT
 Year: 2025
 
-## Project Overview
+##
 
-PapiFit Kenya is a feature-rich Single Page Application (SPA) that provides smart travel, outfit, and activity recommendations based on real-time weather across various Kenyan cities. Users can view live weather, explore personalized outfit/activity suggestions, contribute their own ideas, and even search for an activity to find a city where the current weather fits.
+admin log in
+username: admin
+password: 1234
 
-Admin users are granted full CRUD functionality to manage the suggestion database in a seamless, no-redirect environment.
+### MVP
+
+This project is a weather-based recommendation app that allows users to view real-time weather for major Kenyan cities. Users can click on a city to see personalized suggestions including suitable activities, outfits, and tasks based on the weather. Users can also search by activity to discover which cities match that activity. The backend (JSON server) is hosted on Render, and the frontend is deployed via GitHub Pages. Admins can log in to add, edit, or delete suggestions, making the system dynamic and customizable. It’s a fully functional MVP focused on user experience, weather data, and smart recommendations.
+
+### how it works
+
+How It Works
+PapiFit Kenya displays real-time weather for 10 major cities. Each city card shows temperature and weather conditions. Users can click “See Suggestions” to view suitable activities, outfits, and tasks for that city’s weather. You can also search by activity (like "hiking") to find cities where it’s ideal. Admins can log in to add, edit, or delete suggestions. All weather data comes from the Open-Meteo API, and recommendations are powered by a Render-hosted JSON server.
+
+### user flow
+
+1.Visit the Site
+The user lands on the homepage and sees a live weather dashboard showing 10 Kenyan cities.
+2.Explore Weather Conditions
+Each city card displays temperature and weather conditions (e.g., clear sky, rain).
+
+3.View Recommendations
+Clicking “See Suggestions” shows recommended activity, outfit, and task for that city's weather.
+
+4.Search by Activity
+Users can enter an activity (e.g., hiking, relax) in the search bar to find cities where the weather supports it.
+
+5. Admin Access (Optional)
+   Admins can log in using predefined credentials to add, edit, or delete suggestions for any city and condition.
 
 ## Technologies
 
