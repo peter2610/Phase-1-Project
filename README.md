@@ -51,16 +51,17 @@ On click, a panel opens with:
 Recommended activity
 Recommended outfit
 A relevant task idea
-
-Multiple suggestions per city and condition are rendered with .forEach()
+sample output:
+![results on clicking a city](image-1.png)
 
 ### Activity Search by Keyword
 
 - Users can enter any activity (e.g., "hiking") in the search bar.
   -The app filters cities with suitable weather and matching activity.
   -It then displays the most favorable city for the activity.
-
-sample output
+  on searching activity hiking
+  sample output:
+  ![hiking](image.png)
 
 ### User Add Suggestion
 

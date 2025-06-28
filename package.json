@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/peter2610/Phase-1-Project/issues"
   },
-  "homepage": "https://github.com/peter2610/Phase-1-Project#readme",
+  "homepage": "https://github.com/peter2610/Phase-1-Project",
   "dependencies": {
     "accepts": "^2.0.0",
     "body-parser": "^2.2.0",
