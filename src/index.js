@@ -19,7 +19,7 @@ let currentSuggestion = null;
 // Load all suggestions
 async function loadSuggestions() {
   try {
-    const res = await fetch("http://localhost:3000/suggestions");
+    const res = await fetch("https://phase-1-project-11-py9r.onrender.com/suggestions");
     suggestions = await res.json();
   } catch (err) {
     console.error("Failed to load suggestions:", err);
@@ -150,7 +150,7 @@ function showAddForm(city, weather, activity = "", temp = "--") {
       idea: e.target.idea.value.trim()
     };
 
-    await fetch("http://localhost:3000/suggestions", {
+    await fetch("https://phase-1-project-11-py9r.onrender.com/suggestions", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newSug)
@@ -227,7 +227,7 @@ document.addEventListener("submit", async (e) => {
       idea: document.getElementById("edit-task").value.trim()
     };
 
-    await fetch(`http://localhost:3000/suggestions/${currentSuggestion.id}`, {
+    await fetch(`https://phase-1-project-11-py9r.onrender.com/suggestions/${currentSuggestion.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json"
@@ -258,7 +258,7 @@ async function deleteSuggestion(e) {
   const id = e.target.dataset.id;
 
   if (confirm("Are you sure you want to delete this suggestion?")) {
-    await fetch(`http://localhost:3000/suggestions/${id}`, {
+    await fetch(`https://phase-1-project-11-py9r.onrender.com/suggestions/${id}`, {
       method: "DELETE"
     });
     alert("Suggestion deleted.");
