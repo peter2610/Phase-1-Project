@@ -102,7 +102,6 @@ function showRecommendation(weather) {
   const { city, temp, condition } = weather;
   const match = suggestions.find(s =>
     s.city === city &&
-    s.weather.toLowerCase() === condition.toLowerCase()
   );
 
   recPanel.innerHTML = `
