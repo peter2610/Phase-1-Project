@@ -70,6 +70,9 @@ async function getCityWeather(city) {
 
 // Display all cities
 async function displayWeather() {
+   const loading = document.getElementById("loading-message");
+  loading.classList.remove("hidden"); // Show loading message
+
   dashboard.innerHTML = "";
   for (const city of cities) {
     try {
@@ -95,28 +98,47 @@ async function displayWeather() {
       console.warn(`Could not fetch weather for ${city}`, error);
     }
   }
+  loading.classList.add("hidden"); // Hide loading message when done
 }
 
 // Show single recommendation
+
+function normalize(str) {
+  return str.toLowerCase().trim();
+}
+
 function showRecommendation(weather) {
   const { city, temp, condition } = weather;
   const match = suggestions.find(s =>
-    s.city === city &&
-    s.weather.toLowerCase() === condition.toLowerCase()
+    s.city === city && normalize(s.weather).includes(normalize(condition))
   );
+
+  if (!match) {
+    recPanel.innerHTML = `
+      <div class="recommendation-card" id="recommendation-card">
+        <h2>${city} - ${temp}°C ${condition}</h2>
+        <p><strong>No suggestion available for this weather yet.</strong></p>
+        <button id="suggest-btn">Add Suggestion</button>
+      </div>
+    `;
+    document.getElementById("suggest-btn").addEventListener("click", () =>
+      showAddForm(city, condition, "", temp)
+    );
+    return;
+  }
 
   recPanel.innerHTML = `
     <div class="recommendation-card" id="recommendation-card">
       <h2>${city} - ${temp}°C ${condition}</h2>
-      <p><strong>Activity:</strong> ${match?.activity || "N/A"}</p>
-      <p><strong>Outfit:</strong> ${match?.outfit || "N/A"}</p>
-      <p><strong>Task:</strong> ${match?.idea || "N/A"}</p>
+      <p><strong>Activity:</strong> ${match.activity}</p>
+      <p><strong>Outfit:</strong> ${match.outfit}</p>
+      <p><strong>Task:</strong> ${match.idea}</p>
       <button id="suggest-btn">Add Suggestion</button>
     </div>
   `;
 
   document.getElementById("suggest-btn").addEventListener("click", () =>
-    showAddForm(city, condition, match?.activity || "", temp)
+    showAddForm(city, condition, match.activity, temp)
   );
 
   document.getElementById("recommendation-card").scrollIntoView({ behavior: "smooth" });
@@ -124,19 +146,21 @@ function showRecommendation(weather) {
 
 // Add suggestion form
 function showAddForm(city, weather, activity = "", temp = "--") {
+  recPanel.innerHTML = ""; // clear any previous content
+
   const form = document.createElement("form");
   form.innerHTML = `
-  <label for="activity">Activity:</label>
-  <input id="activity" name="activity" value="${activity}" required><br/>
+    <label for="activity">Activity:</label>
+    <input id="activity" name="activity" value="${activity}" required><br/>
 
-  <label for="outfit">Outfit:</label>
-  <input id="outfit" name="outfit" required><br/>
+    <label for="outfit">Outfit:</label>
+    <input id="outfit" name="outfit" required><br/>
 
-  <label for="idea">Task:</label>
-  <input id="idea" name="idea" required><br/>
+    <label for="idea">Task:</label>
+    <input id="idea" name="idea" required><br/>
 
-  <button type="submit">Submit</button>
-`;
+    <button type="submit">Submit</button>
+  `;
 
   recPanel.appendChild(form);
 
@@ -157,7 +181,6 @@ function showAddForm(city, weather, activity = "", temp = "--") {
     });
 
     await loadSuggestions();
-    form.remove();
     showRecommendation({ city, temp, condition: weather });
   });
 }
@@ -305,7 +328,10 @@ async function handleSearch(e) {
   const activity = document.getElementById("activity").value.trim().toLowerCase();
   if (!activity) return alert("Please enter an activity.");
 
-  const matches = suggestions.filter(s => s.activity.toLowerCase() === activity);
+  const matches = suggestions.filter(s =>
+  s.activity.toLowerCase().includes(activity)
+);
+
 
   if (matches.length === 0) {
     return alert("No cities found with that activity.");

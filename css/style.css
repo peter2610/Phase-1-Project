@@ -57,6 +57,15 @@ header {
   gap: 1em;
   margin-bottom: 2em;
 }
+/*loading weather*/
+#loading-message {
+  text-align: center;
+  font-weight: bold;
+  color: white !important;
+  color: #34495e;
+  padding: 1em;
+  font-size: 1.2em;
+}
 
 /* Weather Cards */
 .weather-card {
