@@ -216,22 +216,50 @@ function renderAdmin() {
     const item = document.createElement("div");
     item.className = "admin-item";
     item.innerHTML = `
-    <div class="admin-item-box">
-      <strong>${s.city}</strong> / ${s.weather}<br/>
-      Activity: ${s.activity}<br/>
-      Outfit: ${s.outfit}<br/>
-      Task: ${s.idea}<br/>
-      <button class="patch" type="button" data-id="${s.id}">Edit</button>
-      <button class="del" type="button" data-id="${s.id}">Delete</button>
-    </div>
-  `;
+  <div class="admin-header">
+    <strong>${s.city}</strong> / ${s.weather}
+    <button class="toggle-details" type="button">View</button>
+  </div>
+  <div class="admin-details hidden">
+    Activity: ${s.activity}<br/>
+    Outfit: ${s.outfit}<br/>
+    Task: ${s.idea}<br/>
+    <button class="patch" type="button" data-id="${s.id}">Edit</button>
+    <button class="del" type="button" data-id="${s.id}">Delete</button>
+  </div>
+`;
+// Toggle button logic
+item.querySelector(".toggle-details").addEventListener("click", () => {
+  const details = item.querySelector(".admin-details");
+  details.classList.toggle("hidden");
+});
+
     item.querySelector(".patch").addEventListener("click", () => {
-      currentSuggestion = s;
-      document.getElementById("edit-activity").value = s.activity;
-      document.getElementById("edit-outfit").value = s.outfit;
-      document.getElementById("edit-task").value = s.idea;
-      document.getElementById("edit-form").classList.remove("hidden");
-    });
+  // Clear any existing forms
+  const existingForm = document.getElementById("edit-form");
+  if (existingForm) existingForm.remove();
+
+  currentSuggestion = s;
+
+  const form = document.createElement("form");
+  form.id = "edit-form";
+  form.innerHTML = `
+    <h3>Edit Suggestion</h3>
+    <label for="edit-activity">Activity:</label>
+    <input id="edit-activity" name="activity" value="${s.activity}" required /><br/>
+
+    <label for="edit-outfit">Outfit:</label>
+    <input id="edit-outfit" name="outfit" value="${s.outfit}" required /><br/>
+
+    <label for="edit-task">Task:</label>
+    <input id="edit-task" name="idea" value="${s.idea}" required /><br/>
+
+    <button type="submit">Save Changes</button>
+    <button type="button" id="cancel-edit">Cancel</button>
+  `;
+
+  item.appendChild(form);
+});
     item.querySelector(".del").addEventListener("click", deleteSuggestion);
     container.appendChild(item);
   });
@@ -384,6 +412,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   await displayWeather();
   renderAdmin();
   searchBtn.addEventListener("click", handleSearch);
+//insert the toggle logic here
+  document.addEventListener("click", (e) => {
+  if (e.target.id === "toggle-admin-content") {
+    const content = document.getElementById("admin-content");
+    const btn = e.target;
+    content.classList.toggle("hidden");
+    btn.textContent = content.classList.contains("hidden") ? "Show" : "Hide";
+  }
+});
+
   // ✅ Global Safety Net
 // 🔒 Prevent accidental form submits from reloading page
 document.addEventListener("submit", function (e) {

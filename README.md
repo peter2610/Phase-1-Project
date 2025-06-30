@@ -7,11 +7,30 @@ Live Demo:
 License: MIT
 Year: 2025
 
-##
+## login
 
 admin log in
 username: admin
 password: 1234
+
+## API
+
+https://api.open-meteo.com/v1/forecast?latitude=...&longitude=...&current_weather=true
+
+## Backend API
+
+https://phase-1-project-11-py9r.onrender.com/suggestions
+
+## note: matching logic, weather and activity logic
+
+If you see the message:
+
+"No suggestion available for this weather yet."
+
+Suggestions are weather-specific. For example, if you have a suggestion for "Nairobi" when it's "Clear sky", it won’t appear when the weather is "Overcast" — even though the city is the same.
+
+✅ It simply means that there is no existing suggestion in the database for that exactly weather.
+both, The selected city, and The current weather condition (e.g., "Overcast", "Clear sky", "Partly cloudy").
 
 ### MVP
 
